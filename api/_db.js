@@ -8,7 +8,7 @@ function getPool() {
       password: "7VcWShw8mY",
       database: "sql12822070",
       port: 3306,
-      ssl: false
+      ssl: false,
       waitForConnections: true,
       connectionLimit:  3,
       queueLimit:       10,
