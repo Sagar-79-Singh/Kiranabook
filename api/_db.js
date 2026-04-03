@@ -3,15 +3,15 @@ let pool;
 function getPool() {
   if (!pool) {
     pool = mysql.createPool({
-      host:             process.env.DB_HOST,
-      port:             3306,
-      user:             process.env.DB_USER,
-      password:         process.env.DB_PASS,
-      database:         process.env.DB_NAME,
+      host: "sql12.freesqldatabase.com",
+      user: "sql12822070",
+      password: "7VcWShw8mY",
+      database: "sql12822070",
+      port: 3306,
+      ssl: false
       waitForConnections: true,
       connectionLimit:  3,
       queueLimit:       10,
-      ssl: false
     });
   }
   return pool;
