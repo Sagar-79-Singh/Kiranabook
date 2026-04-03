@@ -36,7 +36,7 @@ module.exports = async (req, res) => {
         const mode  = paid>=total?'cash':paid>0?'partial':'credit';
         const [pr]  = await conn.query(
           `INSERT INTO purchases (purchase_date,supplier_id,supplier_name,total_amount,paid_amount,payment_mode,notes) VALUES (?,?,?,?,?,?,?)`,
-          [purchase_date, supplier_id||null, supplier_name||null, total, paid, mode, notes||null]
+          [purchase_date, supplier_id ? parseInt(supplier_id) : null, supplier_name||null, total, paid, mode, notes||null]
         );
         for (const item of items) {
           await conn.query(`INSERT INTO purchase_items (purchase_id,item_id,item_name,qty,unit_name,rate) VALUES (?,?,?,?,?,?)`,
