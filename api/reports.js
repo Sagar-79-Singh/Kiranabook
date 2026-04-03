@@ -32,7 +32,6 @@ module.exports = async (req, res) => {
           g.name as group_name,
           u.name as unit_name,
           u.conversion_qty,
-          u.base_unit_name,
           (i.current_stock * i.purchase_price) as stock_value
         FROM items i
         LEFT JOIN groups_master g ON i.group_id = g.id
