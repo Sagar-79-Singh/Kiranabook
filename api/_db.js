@@ -8,7 +8,7 @@ function getPool() {
       password: process.env.DB_PASS || "7VcWShw8mY",              // ← Your actual password
       database: process.env.DB_NAME || "sq12l822070",            // ← Your actual database
       port: 3306,
-      ssl: { rejectUnauthorized: false },  // ← Changed from false to proper SSL config
+      ssl: false,  // ← Changed from false to proper SSL config
       waitForConnections: true,
       connectionLimit: 3,
       queueLimit: 10,
