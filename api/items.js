@@ -11,12 +11,15 @@ module.exports = async (req, res) => {
   try {
     if (req.method === 'GET') {
       const [rows] = await pool.query(`
-        SELECT i.*, g.name as group_name, u.name as unit_name,
-               u.base_unit_id, u.conversion_qty, b.name as base_unit_name
+        SELECT i.*,
+          g.name as group_name,
+          u.name as unit_name,
+          u.base_unit_id,
+          u.conversion_qty,
+          u.base_unit_name
         FROM items i
-        LEFT JOIN groups_master g ON i.group_id=g.id
-        LEFT JOIN units u ON i.unit_id=u.id
-        LEFT JOIN units b ON u.base_unit_id=b.id
+        LEFT JOIN groups_master g ON i.group_id = g.id
+        LEFT JOIN units u ON i.unit_id = u.id
         ORDER BY i.name`);
       return res.json(rows);
     }
