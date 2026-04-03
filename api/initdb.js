@@ -22,7 +22,6 @@ module.exports = async (req, res) => {
       name VARCHAR(50) UNIQUE NOT NULL,
       base_unit_id INT DEFAULT NULL,
       conversion_qty DECIMAL(10,3) DEFAULT NULL,
-      base_unit_name VARCHAR(50) DEFAULT NULL,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`);
 
@@ -137,7 +136,7 @@ module.exports = async (req, res) => {
         ['Ream (500 Pcs)', pcs.id, 500, 'Pcs'],
       ];
       for (const [name, bid, qty, bname] of compounds) {
-        await pool.query(`INSERT IGNORE INTO units (name,base_unit_id,conversion_qty,base_unit_name) VALUES (?,?,?,?)`, [name, bid, qty, bname]);
+        await pool.query(`INSERT IGNORE INTO units (name,base_unit_id,conversion_qty) VALUES (?,?,?,?)`, [name, bid, qty, bname]);
       }
     }
 
