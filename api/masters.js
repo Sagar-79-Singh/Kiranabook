@@ -6,18 +6,21 @@ module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') return res.status(200).end();
   const user = requireAuth(req, res); if (!user) return;
   const pool = getPool();
-  const { type, id } = req.query; // type = 'units' | 'groups'
+  const { type, id } = req.query;
 
   try {
     if (type === 'units') {
       if (req.method === 'GET') {
-        const [rows] = await pool.query(`SELECT u.*, b.name as base_unit_name FROM units u LEFT JOIN units b ON u.base_unit_id=b.id ORDER BY u.name`);
+        const [rows] = await pool.query(`SELECT * FROM units ORDER BY name`);
         return res.json(rows);
       }
       if (req.method === 'POST') {
-        const { name, base_unit_id, conversion_qty } = req.body;
+        const { name, base_unit_id, conversion_qty, base_unit_name } = req.body;
         if (!name) return res.status(400).json({ error: 'Name required' });
-        const [r] = await pool.query(`INSERT INTO units (name,base_unit_id,conversion_qty) VALUES (?,?,?)`, [name, base_unit_id||null, conversion_qty||null]);
+        const [r] = await pool.query(
+          `INSERT INTO units (name,base_unit_id,conversion_qty,base_unit_name) VALUES (?,?,?,?)`,
+          [name, base_unit_id||null, conversion_qty||null, base_unit_name||null]
+        );
         return res.json({ id: r.insertId });
       }
       if (req.method === 'DELETE') {
