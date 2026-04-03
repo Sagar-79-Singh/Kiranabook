@@ -47,6 +47,7 @@ module.exports = async (req, res) => {
           const [[s]] = await conn.query(`SELECT balance FROM suppliers WHERE id=?`, [supplier_id]);
           const nb = (parseFloat(s.balance)||0)+(total-paid);
           await conn.query(`UPDATE suppliers SET balance=? WHERE id=?`, [nb, supplier_id]);
+          console.log("SUPPLIER_ID:", supplier_id);
           await conn.query(`INSERT INTO ledger_entries (entry_date,party_type,party_id,entry_type,reference_id,debit,credit,balance,notes) VALUES (?,?,?,?,?,?,?,?,?)`,
             [purchase_date,'supplier',supplier_name || null,pr.insertId,paid,total,nb,notes||null]);
         }
