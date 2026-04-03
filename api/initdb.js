@@ -136,7 +136,7 @@ module.exports = async (req, res) => {
         ['Ream (500 Pcs)', pcs.id, 500, 'Pcs'],
       ];
       for (const [name, bid, qty, bname] of compounds) {
-        await pool.query(`INSERT IGNORE INTO units (name,base_unit_id,conversion_qty) VALUES (?,?,?,?)`, [name, bid, qty, bname]);
+        await pool.query(`INSERT IGNORE INTO units (name,base_unit_id,conversion_qty) VALUES (?,?,?,?)`, [name, bid, qty]);
       }
     }
 
