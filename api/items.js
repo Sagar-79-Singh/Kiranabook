@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
           g.name as group_name,
           u.name as unit_name,
           u.base_unit_id,
-          u.conversion_qty,
+          u.conversion_qty
         FROM items i
         LEFT JOIN groups_master g ON i.group_id = g.id
         LEFT JOIN units u ON i.unit_id = u.id
