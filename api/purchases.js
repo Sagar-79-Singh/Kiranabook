@@ -26,6 +26,7 @@ module.exports = async (req, res) => {
     }
 
     if (req.method === 'POST') {
+      console.log("BODY:", req.body);
       const { purchase_date, supplier_id, supplier_name, items, paid_amount, notes } = req.body;
       if (!items?.length) return res.status(400).json({ error: 'Koi item nahi' });
       const conn = await pool.getConnection();
