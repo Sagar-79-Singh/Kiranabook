@@ -15,11 +15,11 @@ module.exports = async (req, res) => {
         return res.json(rows);
       }
       if (req.method === 'POST') {
-        const { name, base_unit_id, conversion_qty, base_unit_name } = req.body;
+        const { name, base_unit_id, conversion_qty } = req.body;
         if (!name) return res.status(400).json({ error: 'Name required' });
         const [r] = await pool.query(
-          `INSERT INTO units (name,base_unit_id,conversion_qty,base_unit_name) VALUES (?,?,?,?)`,
-          [name, base_unit_id||null, conversion_qty||null, base_unit_name||null]
+          `INSERT INTO units (name,base_unit_id,conversion_qty) VALUES (?,?,?,?)`,
+          [name, base_unit_id||null, conversion_qty||null]
         );
         return res.json({ id: r.insertId });
       }
