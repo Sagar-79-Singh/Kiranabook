@@ -10,7 +10,8 @@ function getPool() {
       database:         process.env.DB_NAME,
       waitForConnections: true,
       connectionLimit:  3,
-      queueLimit:       10
+      queueLimit:       10,
+      ssl:              false
     });
   }
   return pool;
