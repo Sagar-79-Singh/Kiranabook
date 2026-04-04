@@ -1,4 +1,4 @@
-# 🛒 KiranaBook — Setup Guide
+# 🛒 Sagar Stationery — Setup Guide
 
 ---
 
